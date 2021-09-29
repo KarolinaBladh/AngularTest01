@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { NewPageComponent } from './new-page/new-page.component';
 import { HeaderComponent } from './header/header.component';
+import { MeetingService } from './services/meeting.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import { HeaderComponent } from './header/header.component';
     NgbModule, 
     FormsModule
   ],
-  providers: [],
+  providers: [
+    MeetingService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
