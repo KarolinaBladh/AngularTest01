@@ -1,0 +1,40 @@
+<body>
+    <div class="container-fluid m-0">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1>Hello World!</h1>
+                <a class="btn btn-primary mb-3" routerLink="../new-page">TEST</a>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <div ngbDropdown class="d-inline-block">
+                            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle
+                                dropdown</button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                <button ngbDropdownItem>Action - 1</button>
+                                <button ngbDropdownItem>Another Action</button>
+                                <button ngbDropdownItem>Something else is here</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p>Simple datepicker</p>
+
+                <ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next"></ngb-datepicker>
+
+                <hr />
+
+                <button class="btn btn-sm btn-outline-primary mr-2" (click)="selectToday()">Select Today</button>
+                <button class="btn btn-sm btn-outline-primary mr-2" (click)="dp.navigateTo()">To current month</button>
+                <button class="btn btn-sm btn-outline-primary mr-2" (click)="dp.navigateTo({year: 2013, month: 2})">To
+                    Feb 2013</button>
+
+                <hr />
+
+                <pre>Month: {{ date.month }}.{{ date.year }}</pre>
+                <pre>Model: {{ model | json }}</pre>
+            </div>
+        </div>
+    </div>
+</body>
