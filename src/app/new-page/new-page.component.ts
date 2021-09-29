@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MeetingService } from '../services/meeting.service';
 
 interface Meeting {
   id?: number;
@@ -21,9 +22,10 @@ export class NewPageComponent implements OnInit {
   collectionSize = this.originalMeetings.length;
   meetings: Meeting[] = [];
 
-  constructor() { 
+  constructor(private meetingService: MeetingService) { 
     this.addMeetings();
     this.refreshMeetings();
+    //this.meetingService.setSiteName();
   }
 
   ngOnInit(): void {
