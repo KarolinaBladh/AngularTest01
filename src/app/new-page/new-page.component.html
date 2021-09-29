@@ -1,10 +1,44 @@
-<body>
-    <div class="container-fluid m-0">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h1>God by World!</h1>
-                <a class="btn btn-info"  routerLink="../home">TEST</a>
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1>God by World!</h1>
+        </div>
+
+        <div class="col-12">
+            <a class="btn btn-primary mb-2">Add</a>
+        </div>
+
+        <div class="col-12">
+            <table class="table table-hover table-striped table-light">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Subject</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let meeting of meetings">
+                        <th scope="row">{{ meeting.id }}</th>
+                        <td>{{ meeting.date.year }}.{{ meeting.date.month }}.{{ meeting.date.day }}</td>
+                        <td>{{ meeting.time.hour }}:{{ meeting.time.minute }}</td>
+                        <td>{{ meeting.subject }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="d-flex justify-content-between p-2">
+                <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+                    (pageChange)="refreshMeetings()">
+                </ngb-pagination>
+
+                <select class="custom-select" style="width: auto" [(ngModel)]="pageSize"
+                    (ngModelChange)="refreshMeetings()">
+                    <option [ngValue]="8">8 items per page</option>
+                    <option [ngValue]="16">16 items per page</option>
+                </select>
             </div>
         </div>
     </div>
-</body>
+</div>

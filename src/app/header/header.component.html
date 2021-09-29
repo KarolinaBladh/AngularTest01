@@ -1,0 +1,14 @@
+<div class="container-fluid m-0">
+    <div class="row">
+        <div class="col-12">
+            <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+                <li [ngbNavItem]="1">
+                    <a ngbNavLink routerLink="/home">Hem</a>
+                  </li>
+                <li [ngbNavItem]="2">
+                    <a ngbNavLink routerLink="/list">Lista</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

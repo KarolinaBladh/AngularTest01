@@ -1,0 +1,13 @@
+.table th, .table td {
+    padding: .25rem;
+    font-size: .875rem;
+}
+
+@media (min-width: 572px) { 
+    .table th, .table td {
+        padding: .75rem;
+        font-size: 1rem;
+    }
+ }
+
+
