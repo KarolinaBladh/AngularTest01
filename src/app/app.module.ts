@@ -6,12 +6,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { NewPageComponent } from './new-page/new-page.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NewPageComponent
+    NewPageComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

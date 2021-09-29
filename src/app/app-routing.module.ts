@@ -7,7 +7,7 @@ import { NewPageComponent } from './new-page/new-page.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'new-page', component: NewPageComponent},
+  { path: 'list', component: NewPageComponent},
   { path: '**', component: HomeComponent }
 ];
 
