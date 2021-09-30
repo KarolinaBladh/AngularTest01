@@ -1,13 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Meeting } from '../models/meeting.model';
 import { MeetingService } from '../services/meeting.service';
 
-interface Meeting {
-  id?: number;
-  date: {year: number, month: number, day: number};
-  time: {hour: number, minute: number};
-  subject: string;
-  participants: {name: string, email: string}[];
-  notes: string;
+export interface MeetingSave {
+  value: string;
 }
 
 @Component({
@@ -18,39 +15,52 @@ interface Meeting {
 export class NewPageComponent implements OnInit {
   page = 1;
   pageSize = 8;
-  originalMeetings: Meeting[] = [];
-  collectionSize = this.originalMeetings.length;
   meetings: Meeting[] = [];
+  collectionSize = this.meetings.length;
 
-  constructor(private meetingService: MeetingService) { 
-    this.addMeetings();
+  constructor(public dialog: MatDialog, 
+    private meetingService: MeetingService) {
     this.refreshMeetings();
-    //this.meetingService.setSiteName();
   }
 
   ngOnInit(): void {
   }
 
-  addMeetings(){
-    this.originalMeetings.push({
-      date: {year: 2021, month: 12, day:28},
-      time: {hour:10, minute: 20},
-      subject: "födelsedag",
-      participants: [{name: "Karolina Bladh", email: "karolina.bladh@cgi.com"}],
-      notes: "ta med present"
-    },
-    {
-      date: {year: 2021, month: 12, day:24},
-      time: {hour:15, minute: 0},
-      subject: "julafton",
-      participants: [{name: "Karolina Bladh", email: "karolina.bladh@cgi.com"}],
-      notes: "ta med julklapp"
-    });
+  refreshMeetings() {
+    this.meetings = this.meetingService.meetings
+      .map((meeting, i) => ({ id: i + 1, ...meeting }))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 
-  refreshMeetings() {
-    this.meetings = this.originalMeetings
-      .map((meeting, i) => ({id: i + 1, ...meeting}))
-      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddMeetingDialog, {
+      width: '500px',
+      data: { value: "" }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        let value = result.value;
+      }
+    });
+  }
+}
+
+@Component({
+  selector: 'add-meeting-dialog',
+  templateUrl: 'add-meeting-dialog.html',
+})
+export class AddMeetingDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<AddMeetingDialog>,
+    @Inject(MAT_DIALOG_DATA) public meeting: MeetingSave) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  change(event: any) {
+    this.meeting.value = "test";// event.target.files[0];
   }
 }
