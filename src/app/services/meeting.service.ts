@@ -26,4 +26,17 @@ export class MeetingService {
       notes: "ta med julklapp"
     });
   }
+
+  addNewMeeting(meeting: Meeting){
+    this.meetings.push(meeting);
+  }
+
+  createNewMeeting(){
+    return {
+      dateTime: new Date(),
+      subject: "",
+      participants: [],
+      notes: ""
+    }
+  }
 }
