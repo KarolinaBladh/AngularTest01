@@ -21,8 +21,8 @@
                 <tbody>
                     <tr *ngFor="let meeting of meetings">
                         <th scope="row">{{ meeting.id }}</th>
-                        <td>{{ meeting.date.year }}.{{ meeting.date.month }}.{{ meeting.date.day }}</td>
-                        <td>{{ meeting.time.hour }}:{{ meeting.time.minute }}</td>
+                        <td>{{ meeting.dateTime.toLocaleDateString() }}</td>
+                        <td>{{ meeting.dateTime.toLocaleTimeString() }}</td>
                         <td>{{ meeting.subject }}</td>
                     </tr>
                 </tbody>

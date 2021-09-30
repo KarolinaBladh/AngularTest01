@@ -6,32 +6,24 @@ import { Meeting } from '../models/meeting.model';
 })
 export class MeetingService {
 
-  page = 1;
-  pageSize = 8;
-  originalMeetings: Meeting[] = [];
-  collectionSize = this.originalMeetings.length;
   meetings: Meeting[] = [];
 
-  constructor() { }
+  constructor() {
+    this.addMeetings();
+   }
 
   addMeetings(){
-    this.originalMeetings.push({
-      dateTime: {year: 2021, month: 12, day:28, hour:10, minute: 20},
+    this.meetings.push({
+      dateTime: new Date(2021, 11, 28, 10, 20),
       subject: "födelsedag",
       participants: [{name: "Karolina Bladh", email: "karolina.bladh@cgi.com"}],
       notes: "ta med present"
     },
     {
-      dateTime: {year: 2021, month: 12, day:24, hour:15, minute: 0},
+      dateTime: new Date(2021, 11, 24, 15),
       subject: "julafton",
       participants: [{name: "Karolina Bladh", email: "karolina.bladh@cgi.com"}],
       notes: "ta med julklapp"
     });
-  }
-
-  refreshMeetings() {
-    this.meetings = this.originalMeetings
-      .map((meeting, i) => ({id: i + 1, ...meeting}))
-      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 }
