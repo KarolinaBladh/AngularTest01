@@ -4,9 +4,55 @@
             <h1>God by World!</h1>
         </div>
 
-        <div class="col-12">
-            <a class="btn btn-primary mb-2">Add</a>
-        </div>
+        <ng-template #content let-modal>
+            <div class="modal-header">
+                <h2 class="modal-title mb-0" id="modal-basic-title">Create Meeting</h2>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input id="subject" name="subject" class="form-control" type="text" [(ngModel)]="newMeeting.subject">
+                    </div>
+                    <div class="form-group">
+                        <label>Date and Time</label>
+                        <div class="input-group mb-2">
+                            <ngb-datepicker name="date" (dateSelect)="onDateSelect($event)"></ngb-datepicker>
+                            <ngb-timepicker name="time" [(ngModel)]="time" [hourStep]="hourStep" [minuteStep]="minuteStep" class="mx-3"></ngb-timepicker>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="participant">Participants name and email</label>
+                        <div class="input-group">
+                            <input id="participant" name="name" type="text" class="form-control" [(ngModel)]="participant.name">
+                            <input id="participant" name="email" type="email" class="form-control" [(ngModel)]="participant.email">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar" (click)="addParticipant()"
+                                    type="button">+</button>
+                            </div>
+                        </div>
+
+                        <ul class="list-group">
+                            <li class="list-group-item" *ngFor="let participant of newMeeting.participants">
+                                {{ participant.name }} ({{ participant.email }})
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Notes</label>
+                        <textarea class="form-control" id="notes" name="notes" rows="3" [(ngModel)]="newMeeting.notes"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary m-3" (click)="modal.close('Save click')">Save</button>
+            </div>
+        </ng-template>
+
+        <button class="btn btn-primary m-3" (click)="open(content)">Add</button>
 
         <div class="col-12">
             <table class="table table-hover table-striped table-light">
