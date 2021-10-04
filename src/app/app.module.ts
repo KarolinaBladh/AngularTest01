@@ -9,13 +9,15 @@ import { NewPageComponent } from './new-page/new-page.component';
 import { HeaderComponent } from './header/header.component';
 import { MeetingService } from './services/meeting.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { WeekComponent } from './week/week.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NewPageComponent,
-    HeaderComponent
+    HeaderComponent,
+    WeekComponent
   ],
   imports: [
     BrowserModule,
